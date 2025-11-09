@@ -6,6 +6,36 @@
     <title>My E-commerce Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <style>
+      .gemini-heading {
+        color: #f3f4f6;
+        background: none;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: #f3f4f6;
+        transition: color 0.2s, background 0.2s, -webkit-text-fill-color 0.2s;
+        cursor: pointer;
+        user-select: none;
+      }
+      .gemini-heading.animated {
+        color: transparent;
+        background: linear-gradient(74deg, #4285F4 0%, #9B72CB 33%, #D96570 66%, #fff 100%);
+        background-size: 400% 100%;
+        background-position: 0% 50%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: wipe-gradient 1.5s cubic-bezier(0.3, 0.0, 0.4, 1.0) 1;
+      }
+      @keyframes wipe-gradient {
+        from {
+          background-position: 0% 50%;
+        }
+        to {
+          background-position: -75% 50%;
+        }
+      }
+    </style>
 </head>
 <body>
     <div id="root"></div>
@@ -35,7 +65,7 @@
         return (
           <div>
             <div className="top-bar">
-              <p>Free shipping on orders over $50!</p>
+              <p>Free shipping on all orders!</p>
             </div>
 
             <header>
@@ -71,38 +101,38 @@
             <main>
               <section className="hero">
                 <div className="container">
-                  <h1>Welcome to Our Store!</h1>
+                  <h1 className="gemini-heading" id="geminiHeading">Welcome to Our Store!</h1>
                   <p>Discover amazing products at unbeatable prices.</p>
                   <a href="#" className="btn btn-primary">Shop Now</a>
                 </div>
               </section>
 
-              <section className="featured-products">
-                <div className="container">
+              <section class="featured-products">
+                <div class="container">
                   <h2>Featured Products</h2>
-                  <div className="product-grid">
+                  <div class="product-grid">
                     {products.map(product => (
-                      <div className="product-card" key={product.id}>
+                      <div class="product-card" key={product.id}>
                         <img src={product.image} alt={product.name} />
                         <h3>{product.name}</h3>
-                        <p className="price">${product.price.toFixed(2)}</p>
-                        <button className="btn btn-primary" onClick={() => addToCart(product)}>Add to Cart</button>
+                        <p class="price">${product.price.toFixed(2)}</p>
+                        <button class="btn btn-primary" onClick={() => addToCart(product)}>Add to Cart</button>
                       </div>
                     ))}
                   </div>
                 </div>
               </section>
 
-              <section className="about-us-promo">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-6">
+              <section class="about-us-promo">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6">
                       <h2>About Our Store</h2>
                       <p>We are dedicated to providing you with the best quality products and an exceptional shopping experience. Learn more about our mission and values.</p>
-                      <a href="#" className="btn btn-secondary">Learn More</a>
+                      <a href="#" class="btn btn-secondary">Learn More</a>
                     </div>
-                    <div className="col-md-6">
-                      <img src="https://placehold.co/500x300/EFEFEF/333?text=About+Us" alt="About Us" className="img-fluid" />
+                    <div class="col-md-6">
+                      <img src="https://placehold.co/500x300/EFEFEF/333?text=About+Us" alt="About Us" class="img-fluid" />
                     </div>
                   </div>
                 </div>
@@ -116,7 +146,7 @@
                     <h3>MyStore</h3>
                     <p>Your one-stop shop for the latest trends and quality products.</p>
                   </div>
-                  <div className="footer-section links">
+                  <div class="footer-section links">
                     <h3>Quick Links</h3>
                     <ul>
                       <li><a href="#">Home</a></li>
@@ -134,6 +164,30 @@
 
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
+
+      // Gemini-style heading animation
+      React.useEffect(() => {
+        const heading = document.getElementById('geminiHeading');
+        if (!heading) return;
+        let animating = false;
+        const startAnim = () => {
+          if (animating) return;
+          heading.classList.add('animated');
+          animating = true;
+        };
+        const endAnim = () => {
+          heading.classList.remove('animated');
+          animating = false;
+        };
+        heading.addEventListener('mouseenter', startAnim);
+        heading.addEventListener('animationend', endAnim);
+        heading.addEventListener('touchstart', startAnim);
+        return () => {
+          heading.removeEventListener('mouseenter', startAnim);
+          heading.removeEventListener('animationend', endAnim);
+          heading.removeEventListener('touchstart', startAnim);
+        };
+      }, []);
     </script>
 </body>
 </html>
