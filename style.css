@@ -1,19 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .top-bar {
-    background-color: #f8f9fa;
+    background-color: #1f1f1f;
     text-align: center;
     padding: 0.5rem;
     font-size: 0.9rem;
+    border-bottom: 1px solid #333;
+}
+
+.navbar {
+    background-color: #1f1f1f !important;
+    border-bottom: 1px solid #333;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
 }
 
 .hero {
-    background-color: #f8f9fa;
-    padding: 4rem 0;
+    background-image: url('https://images.unsplash.com/photo-1526374965328-5f61d4dc18c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0;
     text-align: center;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
 }
 
 .featured-products {
@@ -27,27 +60,38 @@ body {
 }
 
 .product-card {
-    border: 1px solid #dee2e6;
+    background-color: #1f1f1f;
+    border: 1px solid #333;
     border-radius: 0.25rem;
     text-align: center;
     padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;
+    border-radius: 0.25rem;
 }
 
 .about-us-promo {
-    background-color: #f8f9fa;
+    background-color: #1f1f1f;
     padding: 4rem 0;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
 }
 
 footer {
-    background-color: #343a40;
+    background-color: #1f1f1f;
     color: white;
     padding: 2rem 0;
+    border-top: 1px solid #333;
 }
 
 .footer-content {
@@ -63,4 +107,9 @@ footer {
 .footer-section ul a {
     color: white;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul a:hover {
+    color: #0d6efd;
 }
