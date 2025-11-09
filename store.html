@@ -4,93 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My E-commerce Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>    <div class="top-bar">
-        <p>Free shipping on orders over $50!</p>
-    </div>
+<body>
+    <div id="root"></div>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.html">MyStore</a>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      const products = [
+        { id: 1, name: 'Stylish T-Shirt', price: 25.00, image: 'https://placehold.co/300x300/EFEFEF/333?text=T-Shirt' },
+        { id: 2, name: 'Comfortable Jeans', price: 45.00, image: 'https://placehold.co/300x300/EFEFEF/333?text=Jeans' },
+        { id: 3, name: 'Classic Sneakers', price: 60.00, image: 'https://placehold.co/300x300/EFEFEF/333?text=Sneakers' },
+        { id: 4, name: 'Elegant Watch', price: 120.00, image: 'https://placehold.co/300x300/EFEFEF/333?text=Watch' },
+      ];
+
+      function App() {
+        const [cart, setCart] = useState([]);
+
+        const addToCart = (product) => {
+          setCart([...cart, product]);
+        };
+
+        return (
+          <div>
+            <div className="top-bar">
+              <p>Free shipping on orders over $50!</p>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="cart">
-                <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <h1>Welcome to Our Store!</h1>
-            <p>Discover amazing products at unbeatable prices.</p>
-            <a href="shop.html" class="btn">Shop Now</a>
-        </section>
-
-        <section class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <img src="images/product1.jpg" alt="Product 1">
-                    <h3>Stylish T-Shirt</h3>
-                    <p class="price">$25.00</p>
-                    <button class="add-to-cart" data-product-id="1" data-product-name="Stylish T-Shirt" data-product-price="25.00">Add to Cart</button>
+            <header>
+              <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container">
+                  <a className="navbar-brand" href="#">MyStore</a>
+                  <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="#">Shop</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="#">About Us</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="#">Contact</a>
+                      </li>
+                    </ul>
+                    <div className="cart">
+                      <a href="#" className="nav-link">Cart ({cart.length})</a>
+                    </div>
+                  </div>
                 </div>
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <img src="images/product2.jpg" alt="Product 2">
-                    <h3>Comfortable Jeans</h3>
-                    <p class="price">$45.00</p>
-                    <button class="add-to-cart" data-product-id="2" data-product-name="Comfortable Jeans" data-product-price="45.00">Add to Cart</button>
-                </div>
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <img src="images/product3.jpg" alt="Product 3">
-                    <h3>Classic Sneakers</h3>
-                    <p class="price">$60.00</p>
-                    <button class="add-to-cart" data-product-id="3" data-product-name="Classic Sneakers" data-product-price="60.00">Add to Cart</button>
-                </div>
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <img src="images/product4.jpg" alt="Product 4">
-                    <h3>Elegant Watch</h3>
-                    <p class="price">$120.00</p>
-                    <button class="add-to-cart" data-product-id="4" data-product-name="Elegant Watch" data-product-price="120.00">Add to Cart</button>
-                </div>
-            </div>
-        </section>
+              </nav>
+            </header>
 
-        <section class="about-us-promo">
-            <div class="about-content">
-                <h2>About Our Store</h2>
-                <p>We are dedicated to providing you with the best quality products and an exceptional shopping experience. Learn more about our mission and values.</p>
-                <a href="about.html" class="btn">Learn More</a>
-            </div>
-            <div class="about-image">
-                <img src="images/about-promo.jpg" alt="About Us">
-            </div>
-        </section>
-    </main>
+            <main>
+              <section className="hero">
+                <div className="container">
+                  <h1>Welcome to Our Store!</h1>
+                  <p>Discover amazing products at unbeatable prices.</p>
+                  <a href="#" className="btn btn-primary">Shop Now</a>
+                </div>
+              </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>MyStore</h3>
-                <p>Your one-stop shop for the latest trends and quality products.</p>
-            </div>
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    
+              <section className="featured-products">
+                <div className="container">
+                  <h2>Featured Products</h2>
+                  <div className="product-grid">
+                    {products.map(product => (
+                      <div className="product-card" key={product.id}>
+                        <img src={product.image} alt={product.name} />
+                        <h3>{product.name}</h3>
+                        <p className="price">${product.price.toFixed(2)}</p>
+                        <button className="btn btn-primary" onClick={() => addToCart(product)}>Add to Cart</button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="about-us-promo">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h2>About Our Store</h2>
+                      <p>We are dedicated to providing you with the best quality products and an exceptional shopping experience. Learn more about our mission and values.</p>
+                      <a href="#" className="btn btn-secondary">Learn More</a>
+                    </div>
+                    <div className="col-md-6">
+                      <img src="https://placehold.co/500x300/EFEFEF/333?text=About+Us" alt="About Us" className="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            <footer>
+              <div className="container">
+                <div className="footer-content">
+                  <div className="footer-section about">
+                    <h3>MyStore</h3>
+                    <p>Your one-stop shop for the latest trends and quality products.</p>
+                  </div>
+                  <div className="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Shop</a></li>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Contact</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+</body>
+</html>
